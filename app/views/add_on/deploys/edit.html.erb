@@ -80,7 +80,7 @@
                     <% end %>
 
                     <h5 style="font-weight:bold;margin-top: 26px;">Initialize Configuration</h5>
-                    <div style="margin:5px 0px 5px 0px;padding:4px;overflow-x:scroll;width: 550px;white-space: nowrap;border: 1px solid #E1DED7;">bash < <(curl -s http://puppet.spreecommerce.com:5000/install?fqdn=<%= server.fqdn %>\&os=<%= @deploy.operating_system %>\&digest=<%= server.digest %> )</div>
+                    <div style="margin:5px 0px 5px 0px;padding:4px;overflow-x:scroll;width: 550px;white-space: nowrap;border: 1px solid #E1DED7;">bash < <(curl -s http://puppet.spreecommerce.com:5000/install?fqdn=<%= server.fqdn %>\&digest=<%= server.digest %> )</div>
                     <em style=" font-size: 11px;margin-bottom:5px;">Copy & execute the command above on the server when logged in as root.</em>
 
                   <% else %>

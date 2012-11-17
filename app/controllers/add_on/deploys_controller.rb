@@ -9,7 +9,7 @@ module AddOn
     end
 
     def new
-      @deploy = Deploy.new
+      @deploy = Deploy.new(:ruby_version => nil)
     end
 
     def create
