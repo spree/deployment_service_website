@@ -1,3 +1,5 @@
-= DeploymentServiceWebsite
+= Deployment Service Web UI
 
-This project rocks and uses MIT-LICENSE.
+This is a small Rails engine the provides the UI for the Spree Deployment Service on spreecommerce.com
+
+It's been open-sourced to allow community members contribute.
