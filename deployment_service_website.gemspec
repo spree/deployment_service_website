@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = DeploymentServiceWebsite::VERSION
   s.authors     = ["Beian Quinn"]
   s.email       = ["brian@spreecommerce.com"]
-  s.homepage    = "spreecommerce.com"
+  s.homepage    = "http://spreecommerce.com"
   s.summary     = "Web UI for Spree Deployment Service."
   s.description = "Engine that integrates with main spreecommerce.com application, to provide UI for deployment service."
 
