@@ -1,0 +1,84 @@
+<h3>Environment Details</h3>
+
+<li class="half">
+  <%= form.label 'Operating System' %><br>
+  <%= form.select :operating_system, [['Ubuntu 12.04 LTS (preferred)', 'ubuntu-12.04'],
+                                      ['Ubuntu 10.04 LTS', 'ubuntu-10.04'],
+                                      ['Ubuntu 11.10', 'ubuntu-11.10'],
+                                      ['Ubuntu 11.04', 'ubuntu-11.04'],
+                                      ['Debian 6.0.x (experimental)', 'debian-6.0'] ] %>
+</li>
+
+<li class="half">
+<%= form.label 'Rails Environment' %><br>
+  <%= form.select :rails_environment, [['Production', 'production'], ['Staging', 'staging'], ['Quality', 'quality']] %>
+</li>
+
+<li class="half">
+  <%= form.label 'Ruby Version' %><br>
+  <%= form.select :ruby_version, ['ree-1.8.7-2011.12', '1.8.7-p357', '1.9.2-p290', '1.9.3-p0', '1.9.3-p125'].reverse %>
+</li>
+
+<li class="half">
+  <%= form.label 'Spree Version' %><br>
+  <%= form.select :spree_version_id, @deployable_versions.collect {|sv| [sv.name,sv.id] } %>
+</li>
+
+<script type="text/javascript">
+  var spree_versions = new Object();
+  <% SpreeVersion.where('demo_git_url is not null').each  do |version| %>
+    spree_versions[<%= version.id %>] = '<%= version.demo_git_url %>';
+  <% end %>
+</script>
+
+
+<li class="full" style="padding-top:10px;clear:both;">
+  <%= form.label 'What would you like to deploy on this environment?' %><br>
+  <%= form.select :deploy_demo, [ ['My own custom Spree application', false], ['A sample Spree store', true]] %><br>
+  <em id="deploy_note"></em>
+</li>
+
+<li class="full" id="deployment_guide">
+  <%= form.label 'Git URL for your application' %><br>
+  <%= form.text_field :git_url, :placeholder => 'git://github.com/your_name/your_spree_app.git' %><br>
+  <em id="deploy_note"></em>
+  <% if @deploy.config_state != 'new' %>
+    <em>
+      Once your servers are built, you can use this <%= link_to "Capistrano Recipe", capistrano_add_on_deploy_path(@deploy), :target => '_blank', :style => 'font-size:13px;' %>
+       to deploy to your new environment.
+    </em>
+  <% end %>
+</li>
+
+
+
+<li>
+  <% if @deploy.new_record? %>
+    <label>Server Configuration</label><br>
+    <em>After clicking "Add", be sure to configure all server(s) with the required information to continue</em>
+  <% else %>
+    <%= form.label 'Configuration Status' %><br>
+    <% if @deploy.config_state == 'new' %>
+      <%= form.radio_button :config_state, 'new' %><label>New</label>
+      <%= form.radio_button :config_state, 'complete' %><label>Complete</label>
+      <br>
+      <em>Mark the configuration as 'Complete' once you have created all the required servers below.</em><br>
+      <em>This will stage all the server configuration details to our deployment server</em>
+    <% else %>
+      <% if @deploy.errors.blank? && @server.nil? %>
+        <% if @deploy.valid? %>
+          <em>Configuration is valid, check below for each individual server's status.</em>
+        <% else %>
+          <em>The current configuration is no longer valid and cannot be used, please review the following errors:</em><br>
+          <% @deploy.errors.full_messages.each do |message| %>
+            <em style="color:red;">- <%= message %></em><br>
+          <% end %>
+        <% end %>
+      <% else %>
+        <em>Unable to determine configuration status.</em>
+      <% end %>
+    <% end %>
+  <% end %>
+</li>
+
+

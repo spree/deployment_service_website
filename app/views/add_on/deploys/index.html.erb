@@ -1,0 +1,58 @@
+<%= render 'shared/account_nav', :current => 'stores' %>
+
+<div class='clear'></div>
+<div class='middle'>
+  <div class='middle-inner'>
+    <div class='inner'>
+      <div class='main'>
+        <div class='main-inner'>
+
+          <h2>Deployments for <%= link_to @store.name, @store %></h2>
+          <table style="width:100%;" class="main">
+            <tr>
+              <th><label>Spree Version</label></th>
+              <th><label>Rails Env.</label></th>
+              <th><label>Ruby Version</label></th>
+              <th><label># of Server(s)</label></th>
+              <th><label>Action</label></th>
+            </tr>
+            <% @store.deploys.each do |deploy| %>
+              <tr>
+                <td><%= deploy.spree_version.name %></td>
+                <td><%= deploy.rails_environment %></td>
+                <td><%= deploy.ruby_version %></td>
+                <td><%= deploy.servers.size %></td>
+                <td>
+                  <%= link_to 'Edit', edit_add_on_deploy_path(deploy)  %> | 
+                  <%= link_to 'Delete', add_on_deploy_path(deploy), :method => 'delete', :confirm => "Are you sure you want to delete this environment?"  %>
+                </td>
+              </tr>
+            <% end %>
+            <% if @store.deploys.empty? %>
+              <tr>
+                <td colspan="4">
+                  No deployments configured, <%= link_to "add a deployment", new_add_on_deploy_path(:store_id => @store) %>.
+                </td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+
+        <div class="sidebar">
+          <div class="sidebar-inner">
+            <div class="spot">
+              <div class="spot-inner">
+                <%= link_to "Add Deployment", new_add_on_deploy_path(:store_id => @store), :class => "button-link" %>
+              </div>
+            </div>
+            <div class="clear"></div>
+          </div>
+        </div>
+
+
+    </div>
+  </div>
+</div>
+
+
