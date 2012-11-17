@@ -1,5 +1,4 @@
 class Server < ActiveRecord::Base
-  belongs_to :order
   belongs_to :deploy, :class_name => 'AddOn::Deploy'
 
   validates :fqdn, :uniqueness => true, :presence => true, :fqdn_format => true
