@@ -24,24 +24,24 @@ default_run_options[:pty] = true
 set :ssh_options, { :forward_agent => true }
 
 namespace :foreman do
-  desc "Export the Procfile to Ubuntu's upstart scripts"
+  desc "Export the Procfile to Bluepill's .pill script"
   task :export, :roles => :app do
-    run "cd #{current_path} && bundle exec foreman export upstart /etc/init"
+    run "cd #{current_path} && bundle exec foreman export bluepill /data/#{application}/shared/config"
   end
 
   desc "Start the application services"
   task :start, :roles => :app do
-    sudo "start #{application}"
+    sudo "bluepill #{application} start"
   end
 
   desc "Stop the application services"
   task :stop, :roles => :app do
-    sudo "stop #{application}"
+    sudo "bluepill #{application} stop"
   end
 
   desc "Restart the application services"
   task :restart, :roles => :app do
-    sudo "restart #{application}"
+    sudo "bluepill #{application} restart"
   end
 end
 
