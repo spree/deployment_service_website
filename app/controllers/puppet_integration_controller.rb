@@ -69,6 +69,8 @@ class PuppetIntegrationController < ApplicationController
   end
 
   def report
+    body = request.body.read
+    body.gsub! /!ruby\/object:(\w+::)+\w+/, '' #drop serialization
     report = YAML.load(body)
 
     server = Server.where(:fqdn => report['host']).first
