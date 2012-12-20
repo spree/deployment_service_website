@@ -6,7 +6,6 @@ class DelayedDeploymentRemove < Struct.new(:fqdn, :digest)
     begin
       result = self.class.get('/remove', :query => {:digest => digest, :fqdn => fqdn}, :timeout => 300)
     rescue Exception => e
-      deploy.update_attributes(:config_state => 'error')
       raise e
     end
   end
