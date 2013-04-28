@@ -55,6 +55,13 @@ namespace :deploy do
   end
 end
 
+namespace :deface do
+  task :precompile do
+    # the spree app conditionally disables deface in production based on DEFACE_PRECOMPILE
+    run "cd #{release_path} && #{rake} RAILS_ENV=#{rails_env} DEFACE_PRECOMPILE=true deface:precompile" 
+  end
+end
+
 <% if @compile_assets %>
 before 'deploy:assets:precompile', 'deploy:symlink_shared'
 <% else %>
