@@ -10,7 +10,7 @@ The deployment service now only supports <strong>Ubuntu 12.04 LTS</strong>.
 
 <li class="half">
   <%= form.label 'Ruby Version' %><br>
-  <%= form.select :ruby_version, ['ree-1.8.7-2012.02', '1.8.7-p370', '1.9.2-p320', '1.9.3-p125', '1.9.3-p327'], 
+  <%= form.select :ruby_version, ['ree-1.8.7-2012.02', '1.8.7-p370', '1.9.2-p320', '1.9.3-p125', '1.9.3-p327', '1.9.3-p392'],
                   :selected => ( @deploy.ruby_version.nil? ? '1.9.3-p327' : @deploy.ruby_version ) %>
 </li>
 
