@@ -47,7 +47,7 @@
                   <td style="width:45%;">
                     <% if server.has_class?('appserver') %>
                       <label>Unicorn Workers:</label><br>
-                      <%= form.select :number_unicorn_workers, (2..20).to_a, :style => 'width:50%' %>
+                      <%= form.select :number_unicorn_workers, (2..200).to_a, :style => 'width:50%' %>
                     <% else %>
                       <%= form.hidden_field :number_unicorn_workers, :value => 0  %>
 
